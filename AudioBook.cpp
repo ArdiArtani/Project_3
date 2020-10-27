@@ -54,5 +54,5 @@ void AudioBook::display() const
     std::cout <<  "Author: " << getAuthor() << std::endl;
     std::cout <<  "Narrator: " << getSpeaker() << std::endl;
     std::cout <<  "Genre: " << getGenre() << std::endl;
-    std::cout <<  "Length: " << getLength() << std::endl;
+    std::cout <<  "Length: " << getLength() << std::endl << std::endl;
 }

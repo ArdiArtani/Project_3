@@ -71,5 +71,5 @@ void Podcast::display() const
     std::cout <<  "Host: " << getHost() << std::endl;
     std::cout <<  "Guest: " << getGuest() << std::endl;
     std::cout <<  "Genre: " << getGenre() << std::endl;
-    std::cout <<  "Length: " << getLength() << std::endl;
+    std::cout <<  "Length: " << getLength() << std::endl << std::endl;
 }

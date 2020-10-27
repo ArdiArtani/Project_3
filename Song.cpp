@@ -49,5 +49,5 @@ void Song::display() const
     std::cout << getTitle() << std::endl;
     std::cout <<  "Artist: " << getArtist() << std::endl;
     std::cout <<  "Genre: " << getGenre() << std::endl;
-    std::cout <<  "Length: " << getLength() << std::endl;
+    std::cout <<  "Length: " << getLength() << std::endl << std::endl;
 }
