@@ -118,7 +118,7 @@ bool DoublyLinkedList<ItemType>::remove(const int &position)
     
     do
     {
-        current_ptr_ = current_ptr_->next;
+        current_ptr_ = current_ptr_->getNext();
         count++;
     } while (current_ptr_ != head_ptr_);
 
@@ -127,29 +127,29 @@ bool DoublyLinkedList<ItemType>::remove(const int &position)
     {
         for (int i = 0;i < count - 1; i++)
         {
-            current_ptr_ = current_ptr_->next;
+            current_ptr_ = current_ptr_->getNext();
         }
         DoubleNode<ItemType>* temp_ptr_ = head_ptr_;
-        current_ptr_->next = temp_ptr_->next;
-        head_ptr_ = temp_ptr_->next;
+        current_ptr_->getNext() = temp_ptr_->getNext();
+        head_ptr_ = temp_ptr_->getNext();
         delete temp_ptr_;
     }
     else
     {
         for (int i = 0; i < position - 1; i++)
         {
-            current_ptr_ = current_ptr_->next;
+            current_ptr_ = current_ptr_->getNext();
         }
         
         DoubleNode<ItemType>* del_ptr_ = current_ptr_;
-        current_ptr_ = current_ptr_->next;
+        current_ptr_ = current_ptr_->getNext();
         DoubleNode<ItemType>* last_ptr_ = head_ptr_;
         
         for (int i = 0; i < position - 2; i++)
         {
-            last_ptr_ = last_ptr_->next;
+            last_ptr_ = last_ptr_->getNext();
         }
-        last_ptr_->next = current_ptr_;
+        last_ptr_->getNext() = current_ptr_;
         size_--;
         delete del_ptr_;
    }
