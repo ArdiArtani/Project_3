@@ -61,7 +61,7 @@ void Playlist::operator-=(Playlist rhs)
 */
 void Playlist::skip()
 {
-    PlaylistItem->skip();
+    
 }
 
 
@@ -70,14 +70,18 @@ void Playlist::skip()
 */
 void Playlist::rewind()
 {
-    PlaylistItem->rewind();
+    
 }
 
 
 /*
     Goal: Calls the display function of each item in the Playlist
 */
+
 void Playlist::display()
 {
-    PlaylistItem->display();
+    while (head_ptr_ != nullptr) {
+        head_ptr_->getItem()->display();
+        head_ptr_ = head_ptr_->getNext();
+    }
 }
