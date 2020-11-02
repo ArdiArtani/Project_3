@@ -13,8 +13,8 @@
 template<class ItemType>
 DoublyLinkedList<ItemType>::DoublyLinkedList()
 {
-    head = nullptr;
-    size = 0;
+    head_ptr_ = nullptr;
+    size_ = 0;
 } //end DoublyLinkedList();
 
 
@@ -24,15 +24,17 @@ DoublyLinkedList<ItemType>::DoublyLinkedList()
 template<class ItemType>
 DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType> &a_list)
 {
-    // Let DoublyLinkedList be 1 indexed unlike arrays, which are 0 indexed
-    // create for loop to loop over list
-    DoubleNode<ItemType> *temp_list_ptr_ = a_list.head;
-    for (int i = 1; i <= a_list.size; i++) {
-        // copy each node
-        // getItem data
-        ItemType item = temp_list_ptr_->getItem();
-        // insert
-        this->insert(i, item);
+    // set default parameters
+    head_ptr_ = nullptr;
+    size_ = 0;
+    
+    // points to the headpointer of the a_list
+    DoubleNode<ItemType>* temp_list_ptr_ = a_list.head_ptr_;
+
+    // inserts items from a_list to the new one
+    for (int i = 1; i <= a_list.getSize(); i++)
+    {
+        this->insert(temp_list_ptr_->getItem(), i);
         temp_list_ptr_ = temp_list_ptr_->getNext();
     }
 } //end DoublyLinkedList();
@@ -55,7 +57,7 @@ template<class ItemType>
 bool DoublyLinkedList<ItemType>::insert(const ItemType &item, const int &position)
 {
     // first valid position return false
-    if (position < 1 || position > (size + 1)) {
+    if (position < 1 || position > (size_ + 1)) {
         return false;
     }
     else {
@@ -65,20 +67,20 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType &item, const int &positio
         // if index is equal to 1 add node head position
         if (position == 1) {
             // check if head list has any nodes
-            if (head == nullptr) {
-                head = new_node_;
+            if (head_ptr_ == nullptr) {
+                head_ptr_ = new_node_;
             }
             else {
                 // assign head to new_node_ setNext
-                new_node_->setNext(head);
-                head->setPrevious(new_node_);
+                new_node_->setNext(head_ptr_);
+                head_ptr_->setPrevious(new_node_);
                 // reset head
-                head = new_node_;
+                head_ptr_ = new_node_;
             }
         }
         else {
             // create for loop to loop till given position in the list
-            DoubleNode<ItemType>* temp_node_ptr_ = head;
+            DoubleNode<ItemType>* temp_node_ptr_ = head_ptr_;
             for (int i = 2; i < position; i++) {
                 temp_node_ptr_ = temp_node_ptr_->getNext();
             }
@@ -94,7 +96,7 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType &item, const int &positio
         }
 
         // imcreament size and return true
-        size++;
+        size_++;
         return true;
     }
 } //end insert
@@ -107,7 +109,7 @@ template<class ItemType>
 bool DoublyLinkedList<ItemType>::remove(const int &position)
 {
     // first valid position return false
-    if (position < 1 || position > size) {
+    if (position < 1 || position > size_) {
        return false;
     }
     else {
@@ -116,17 +118,17 @@ bool DoublyLinkedList<ItemType>::remove(const int &position)
         
        // check if head node is equal to 1
        if (position == 1) {
-           temp_ptr_ = head;
-           head = head->getNext(); // call getNext()
-           if (head != nullptr) {
+           temp_ptr_ = head_ptr_;
+           head_ptr_ = head_ptr_->getNext(); // call getNext()
+           if (head_ptr_ != nullptr) {
                // otherwise call setPrevious()
-               head->setPrevious(nullptr);
+               head_ptr_->setPrevious(nullptr);
            }
            delete temp_ptr_;
        }
        else {
            // create for loop to loop till given position in the list
-           DoubleNode<ItemType>* temp_node_ptr_ = head;
+           DoubleNode<ItemType>* temp_node_ptr_ = head_ptr_;
            for (int i = 2; i < position; i++) {
                // assign next node to temp_ptr_
                temp_ptr_ = temp_node_ptr_->getNext();
@@ -143,7 +145,7 @@ bool DoublyLinkedList<ItemType>::remove(const int &position)
            }
        }
        // decrement size
-       size--;
+        size_--;
        return true;
     }
 } // end remove
@@ -156,7 +158,7 @@ template<class ItemType>
 int DoublyLinkedList<ItemType>::getSize() const
 {
     // returns protected member size
-    return size;
+    return size_;
 }
 
 
@@ -166,8 +168,8 @@ int DoublyLinkedList<ItemType>::getSize() const
 template<class ItemType>
 DoubleNode<ItemType>* DoublyLinkedList<ItemType>::getHeadPtr() const
 {
-    // returns protected member head
-    return head;
+    // returns protected member head_ptr_
+    return head_ptr_;
 }
 
 
@@ -177,19 +179,19 @@ DoubleNode<ItemType>* DoublyLinkedList<ItemType>::getHeadPtr() const
 template<class ItemType>
 DoubleNode<ItemType>* DoublyLinkedList<ItemType>::getAtPos(const int &pos) const
 {
-   // validate the position of pos
-   if (pos < 1 || pos > size) {
-       return nullptr;
-   }
-   else {
-       // create a DoubleNode temp iterator
-       DoubleNode<ItemType>* temp_item_ptr_ = head;
-       // for loop i to pos
-       for (int i = 1; i < pos; i++) {
-           temp_item_ptr_ = temp_item_ptr_->getNext();
-       }
-       return temp_item_ptr_;
-   }
+    // check if position exists
+    if (pos > size_ || pos < 1 ) {
+        return nullptr;
+    }
+    else {
+        // finds the node the position and returns it
+        DoubleNode<ItemType>* temp_node_ptr_ = head_ptr_;
+        for (int i = 1; i < pos; i++)
+        {
+            temp_node_ptr_ = temp_node_ptr_->getNext();
+        }
+        return temp_node_ptr_;
+    }
 }
 
 
@@ -200,7 +202,7 @@ template<class ItemType>
 bool DoublyLinkedList<ItemType>::isEmpty() const
 {
     // check if protected member size is equal to 0
-    return size == 0;
+    return size_ == 0;
 } // end isEmpty()
  
 
@@ -211,15 +213,15 @@ template<class ItemType>
 void DoublyLinkedList<ItemType>::clear()
 {
     // set protected size memeber to 0
-    size = 0;
-    DoubleNode<ItemType> *temp_node_ = head;
+    size_ = 0;
+    DoubleNode<ItemType> *del_node_ = head_ptr_;
     // while untill head is not nullptr
-    while (head != nullptr) {
-        head = head->getNext();
-        delete temp_node_;
-        temp_node_ = head;
+    while (head_ptr_ != nullptr) {
+        head_ptr_ = head_ptr_->getNext();
+        delete del_node_;
+        del_node_ = head_ptr_;
     }
-    delete temp_node_;
+    delete del_node_;
 } // end clear()
 
 
@@ -250,11 +252,11 @@ void DoublyLinkedList<ItemType>::display() const {
     // open bracket
     std::cout << "[";
     // for loop each node and print its item
-    DoubleNode<ItemType>* temp_list_ptr_ = head;
-    for (int i = 0; i < size; i++) {
+    DoubleNode<ItemType>* temp_list_ptr_ = head_ptr_;
+    for (int i = 0; i < size_; i++) {
         std::cout << temp_list_ptr_->getItem();
         // print comma after each node aside from the last one
-        if (i < size - 1) {
+        if (i < size_ - 1) {
            std::cout << ", ";
         }
         // move to next node using getNext()
@@ -271,18 +273,18 @@ void DoublyLinkedList<ItemType>::display() const {
 template<class ItemType>
 void DoublyLinkedList<ItemType>::displayBackwards() const {
     // for lopp to move to end of the list
-    DoubleNode<ItemType>* temp_list_ptr_ = head;
-    for (int i = 1; i < size; i++) {
+    DoubleNode<ItemType>* temp_list_ptr_ = head_ptr_;
+    for (int i = 1; i < size_; i++) {
         temp_list_ptr_ = temp_list_ptr_->getNext();
     }
     
     // open bracket
     std::cout << "[";
     // for loop each node in reverse order and print its item
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size_; i++) {
         std::cout << temp_list_ptr_->getItem();
         // print comma after each node aside from the last one
-        if (i < size - 1) {
+        if (i < size_ - 1) {
             std::cout << ", ";
         }
         // move to previous node using getPrevious()
@@ -300,32 +302,37 @@ template<class ItemType>
 DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLinkedList<ItemType> &a_list)
 {
     // create a new list to return
-    DoublyLinkedList<ItemType>* interleave_output_ = new DoublyLinkedList();
+    DoublyLinkedList<ItemType>* interleavelist_ = new DoublyLinkedList();
     
     // set index to 1
     int index = 1;
     
-    // assign both lists new nodes
-    DoubleNode<ItemType>* temp_list1_ = this->head;
-    DoubleNode<ItemType>* temp_list2_ = a_list.head;
+    // points to the head_ptr_ of the first list
+    DoubleNode<ItemType>* temp_list1_ = this->head_ptr_;
+    // points to the head_ptr_ of the second list
+    DoubleNode<ItemType>* temp_list2_ = a_list.head_ptr_;
+    
     
     // loop till lists have node left to add
     while (!(temp_list1_ == nullptr && temp_list2_ == nullptr)) {
         
         // if first list is not null add node
         if (temp_list1_ != nullptr) {
-            interleave_output_->insert(index, temp_list1_->getItem());
+            interleavelist_->insert(index, temp_list1_->getItem());
             temp_list1_ = temp_list1_->getNext();
             index++;
         }
         
         // if second list is not null add node
         if (temp_list2_ != nullptr) {
-            interleave_output_->insert(index, temp_list2_->getItem());
+            interleavelist_->insert(index, temp_list2_->getItem());
             temp_list2_ = temp_list2_->getNext();
             index++;
         }
     }
     
-    return *interleave_output_;
+    return *interleavelist_;
 } // end interleave
+
+
+

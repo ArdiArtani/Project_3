@@ -55,9 +55,9 @@ public:
     
 protected:
     // a head pointer to a DoubleNode of any arbitrary type ItemType
-    DoubleNode<ItemType>* head;
+    DoubleNode<ItemType>* head_ptr_;
     // a member that keeps track of the size of the list
-    int size;
+    int size_;
 };
 
 #include "DoublyLinkedList.cpp"
