@@ -25,8 +25,8 @@ template<class ItemType>
 DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType> &a_list)
 {
     // set default parameters
-    head_ptr_ = nullptr;
-    size_ = 0;
+//    head_ptr_ = nullptr;
+//    size_ = 0;
     
     // points to the headpointer of the a_list
     DoubleNode<ItemType>* temp_list_ptr_ = a_list.head_ptr_;
@@ -57,7 +57,7 @@ template<class ItemType>
 bool DoublyLinkedList<ItemType>::insert(const ItemType &item, const int &position)
 {
     // first valid position return false
-    if (position < 1 || position > (size_ + 1)) {
+    if (position < 1 || position > size_ + 1) {
         return false;
     }
     else {
