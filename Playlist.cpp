@@ -25,14 +25,15 @@ double Playlist::getTotalTime() const
     
     // create temp node ptr from head ptr
     DoubleNode <PlaylistItem*>* temp_ptr_ = head_ptr_;
+    
     // loop until temp_ptr is not nullptr
-    while (temp_ptr_ != nullptr)
-    {
+    while (temp_ptr_ != nullptr) {
         // grab item length
         totalTime += temp_ptr_->getItem()->getLength();
         // go to next node
         temp_ptr_ = temp_ptr_->getNext();
     }
+    
     return totalTime;
 }
 
