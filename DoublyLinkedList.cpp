@@ -308,31 +308,51 @@ DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLi
     int index = 1;
     
     // points to the head_ptr_ of the first list
-    DoubleNode<ItemType>* temp_list1_ = this->head_ptr_;
+    DoubleNode<ItemType>* first_list_ = this->head_ptr_;
     // points to the head_ptr_ of the second list
-    DoubleNode<ItemType>* temp_list2_ = a_list.head_ptr_;
+    DoubleNode<ItemType>* second_list_ = a_list.head_ptr_;
     
-    
-    // loop till lists have node left to add
-    while (!(temp_list1_ == nullptr && temp_list2_ == nullptr)) {
+    while (first_list_ != nullptr && second_list_ != nullptr) {
+        // if first list is not done adding add node
+        interleavelist_->insert(first_list_->getItem(), index);
+        first_list_ = first_list_->getNext();
+
+        // if second list is not done adding add node
+        interleavelist_->insert(second_list_->getItem(), index);
+        second_list_ = second_list_->getNext();
         
-        // if first list is not null add node
-        if (temp_list1_ != nullptr) {
-            interleavelist_->insert(index, temp_list1_->getItem());
-            temp_list1_ = temp_list1_->getNext();
-            index++;
-        }
-        
-        // if second list is not null add node
-        if (temp_list2_ != nullptr) {
-            interleavelist_->insert(index, temp_list2_->getItem());
-            temp_list2_ = temp_list2_->getNext();
+        index++;
+    }
+
+    // if there are still items in list 1
+    if (first_list_ != nullptr && second_list_ == nullptr){
+        // while first_list_ does not equal nullptr
+        while(first_list_ != nullptr){
+            // inseert item into interleavelist_
+            interleavelist_->insert(first_list_->getItem(), index);
+            // getNext()
+            first_list_ = first_list_->getNext();
             index++;
         }
     }
     
+    // if there are still items in list 2
+    if (first_list_ == nullptr && second_list_ != nullptr) {
+        // while second_list_ does not equal nullptr
+        while(second_list_ != nullptr){
+            // inseert item into interleavelist_
+            interleavelist_->insert(second_list_->getItem(), index);
+            // getNext()
+            second_list_ = second_list_->getNext();
+            index++;
+        }
+    }
+
     return *interleavelist_;
 } // end interleave
+
+
+
 
 
 
