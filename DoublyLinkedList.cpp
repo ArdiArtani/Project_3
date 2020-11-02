@@ -108,42 +108,51 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType &item, const int &positio
 template<class ItemType>
 bool DoublyLinkedList<ItemType>::remove(const int &position)
 {
-    
     // first valid position return false
     if (position < 1 || position > size_) {
        return false;
     }
     
     // create a temp node pointer
-    DoubleNode<ItemType>* temp_ptr_;
+    DoubleNode<ItemType>* temp_ptr_ = head_ptr_;
     
     // check if head node is equal to 1
     if (position == 1) {
-        temp_ptr_ = head_ptr_;
-        head_ptr_ = head_ptr_->getNext(); // call getNext()
-        if (head_ptr_ != nullptr) {
-            // otherwise call setPrevious()
-            head_ptr_->setPrevious(nullptr);
+        // if first node is to be removed
+        if (head_ptr_->getNext() != nullptr) {
+            head_ptr_ = nullptr;
         }
-        delete temp_ptr_;
+        else
+        {
+            // call getNext() and set setPrevious to nullptr
+            temp_ptr_ = temp_ptr_->getNext();
+            temp_ptr_->setPrevious(nullptr);
+            head_ptr_ = temp_ptr_;
+        }
     }
     else {
-        // create for loop to loop till given position in the list
-        DoubleNode<ItemType>* temp_node_ptr_ = head_ptr_;
+        // create for loop from i to position
         for (int i = 2; i < position; i++) {
             // assign next node to temp_ptr_
-            temp_ptr_ = temp_node_ptr_->getNext();
-
-            // remove node links from right side only if node at right exist
-            if (temp_node_ptr_->getNext()->getNext() != nullptr) {
-                temp_node_ptr_->getNext()->getNext()->setPrevious(temp_node_ptr_);
-                temp_node_ptr_->setNext(temp_node_ptr_->getNext()->getNext());
-            }
-            else {
-                temp_node_ptr_->setNext(nullptr);
-            }
-            delete temp_ptr_;
+            temp_ptr_ = temp_ptr_->getNext();
         }
+
+        // assign poninter to remove node
+        DoubleNode<ItemType>* temp_ptr_remove_ = temp_ptr_->getNext();
+        
+        // if the next poniter exists
+        if (temp_ptr_remove_->getNext() != nullptr) {
+            // connect pointers with the one that needs to be removed
+            DoubleNode<ItemType>* temp_ptr_next_ = temp_ptr_remove_->getNext();
+            temp_ptr_->setNext(temp_ptr_next_);
+            temp_ptr_next_->setPrevious(temp_ptr_);
+        }
+        else {
+            // if there is no next pointer set it to null
+            temp_ptr_->setNext(nullptr);
+        }
+        // delete the temp_ptr_ node
+        delete temp_ptr_;
     }
     
     // decrement size
