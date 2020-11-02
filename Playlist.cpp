@@ -69,17 +69,13 @@ void Playlist::skip()
     
     // create temp node ptr from head ptr
     DoubleNode <PlaylistItem*>* temp_ptr_ = head_ptr_;
-    
     DoubleNode <PlaylistItem*>* prev_ptr_ = nullptr;
-    DoubleNode <PlaylistItem*>* last_ptr_ = head_ptr_;
+    DoubleNode <PlaylistItem*>* next_ptr_ = head_ptr_;
  
-    while( last_ptr_->getNext() != nullptr) {
+    while(temp_ptr_->getNext() != nullptr) {
         prev_ptr_ = temp_ptr_;
-        last_ptr_ = last_ptr_->getNext();
+        temp_ptr_ = next_ptr_->getNext();
     }
-    prev_ptr_->setNext(nullptr);
-    last_ptr_->setNext(temp_ptr_);
-    temp_ptr_ = last_ptr_;
 }
 
 
@@ -88,19 +84,7 @@ void Playlist::skip()
 */
 void Playlist::rewind()
 {
-    // create temp node ptr from head ptr
-    DoubleNode <PlaylistItem*>* temp_ptr_ = head_ptr_;
     
-    DoubleNode <PlaylistItem*>* prev_ptr_ = nullptr;
-    DoubleNode <PlaylistItem*>* last_ptr_ = head_ptr_;
- 
-    while( last_ptr_->getNext() != nullptr) {
-        prev_ptr_ = temp_ptr_;
-        last_ptr_ = last_ptr_->getNext();
-    }
-    prev_ptr_->setNext(nullptr);
-    last_ptr_->setNext(temp_ptr_);
-    temp_ptr_ = last_ptr_;
 }
 
 
