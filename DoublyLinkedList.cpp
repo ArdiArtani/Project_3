@@ -314,7 +314,7 @@ DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLi
         
         // if first list is not null add node
         if (temp_list1_ != nullptr) {
-            interleave_output_->insert(index, temp_list1_->getItem();
+            interleave_output_->insert(index, temp_list1_->getItem());
             temp_list1_ = temp_list1_->getNext();
             index++;
         }
