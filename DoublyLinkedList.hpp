@@ -10,7 +10,6 @@
 
 #include "DoubleNode.hpp"
 #include <iostream>
-//using namespace std;
 
 template<class ItemType>
 class DoublyLinkedList
@@ -61,7 +60,7 @@ protected:
     int size;
 };
 
-//#include "DoublyLinkedList.cpp"
+#include "DoublyLinkedList.cpp"
 #endif /* DoublyLinkedList_hpp */
 
 

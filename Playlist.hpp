@@ -11,7 +11,8 @@
 #include "DoublyLinkedList.hpp"
 #include "PlaylistItem.hpp"
 
-class Playlist : public DoublyLinkedList<PlaylistItem *>
+
+class Playlist : public DoublyLinkedList<PlaylistItem*>
 {
 public:
     /*
