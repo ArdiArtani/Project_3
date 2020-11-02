@@ -68,8 +68,9 @@ void Playlist::skip()
 {
     // create temp node ptr from head ptr
     DoubleNode <PlaylistItem*>* temp_ptr_ = head_ptr_;
-      
-    while(temp_ptr_->getNext()->getNext() != nullptr) // traverse till second last node
+    
+    // traverse till second last node
+    while(temp_ptr_->getNext() != nullptr)
     {
         temp_ptr_->setItem(temp_ptr_->getItem());
     }
@@ -113,3 +114,4 @@ void Playlist::display()
         temp_ptr_ = temp_ptr_->getNext();
     }
 }
+
