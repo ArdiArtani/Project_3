@@ -61,7 +61,7 @@ void Playlist::operator-=(Playlist rhs)
 */
 void Playlist::skip()
 {
-    
+    PlaylistItem->skip();
 }
 
 
@@ -70,7 +70,7 @@ void Playlist::skip()
 */
 void Playlist::rewind()
 {
-    
+    PlaylistItem->rewind();
 }
 
 
@@ -79,5 +79,5 @@ void Playlist::rewind()
 */
 void Playlist::display()
 {
-    
+    PlaylistItem->display();
 }

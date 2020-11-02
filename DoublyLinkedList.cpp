@@ -345,43 +345,6 @@ DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLi
             index++;
         }
     }
-
-    
-    
-//        // if first list is not done adding add node
-//        interleavelist_->insert(first_list_->getItem(), index);
-//        first_list_ = first_list_->getNext();
-//
-//        // if second list is not done adding add node
-//        interleavelist_->insert(second_list_->getItem(), index);
-//        second_list_ = second_list_->getNext();
-//
-//        index++;
-    
-//    // if there are still items in list 1
-//    if (first_list_ != nullptr && second_list_ == nullptr){
-//        // while first_list_ does not equal nullptr
-//        while(first_list_ != nullptr){
-//            // inseert item into interleavelist_
-//            interleavelist_->insert(first_list_->getItem(), index);
-//            // getNext()
-//            first_list_ = first_list_->getNext();
-//            index++;
-//        }
-//    }
-//
-//    // if there are still items in list 2
-//    if (first_list_ == nullptr && second_list_ != nullptr) {
-//        // while second_list_ does not equal nullptr
-//        while(second_list_ != nullptr){
-//            // inseert item into interleavelist_
-//            interleavelist_->insert(second_list_->getItem(), index);
-//            // getNext()
-//            second_list_ = second_list_->getNext();
-//            index++;
-//        }
-//    }
-
     return *interleavelist_;
 } // end interleave
 
