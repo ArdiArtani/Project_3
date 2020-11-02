@@ -85,8 +85,11 @@ void Playlist::rewind()
 
 void Playlist::display()
 {
-    while (head_ptr_ != nullptr) {
-        head_ptr_->getItem()->display();
-        head_ptr_ = head_ptr_->getNext();
+    // create temp node ptr from head ptr
+    DoubleNode <PlaylistItem*>* temp_ptr_ = head_ptr_;
+    
+    while (temp_ptr_ != nullptr) {
+        temp_ptr_->getItem()->display();
+        temp_ptr_ = temp_ptr_->getNext();
     }
 }
