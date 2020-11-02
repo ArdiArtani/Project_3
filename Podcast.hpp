@@ -8,7 +8,6 @@
 #ifndef Podcast_hpp
 #define Podcast_hpp
 
-
 #include "PlaylistItem.hpp"
 
 class Podcast : public PlaylistItem
