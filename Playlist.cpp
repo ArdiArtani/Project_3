@@ -67,6 +67,19 @@ void Playlist::operator-=(Playlist rhs)
 void Playlist::skip()
 {
     
+    // create temp node ptr from head ptr
+    DoubleNode <PlaylistItem*>* temp_ptr_ = head_ptr_;
+    
+    DoubleNode <PlaylistItem*>* prev_ptr_ = nullptr;
+    DoubleNode <PlaylistItem*>* last_ptr_ = head_ptr_;
+ 
+    while( last_ptr_->getNext() != nullptr) {
+        prev_ptr_ = temp_ptr_;
+        last_ptr_ = last_ptr_->getNext();
+    }
+    prev_ptr_->setNext(nullptr);
+    last_ptr_->setNext(temp_ptr_);
+    temp_ptr_ = last_ptr_;
 }
 
 
