@@ -264,7 +264,6 @@ void DoublyLinkedList<ItemType>::display() const {
         temp_list_ptr_ = temp_list_ptr_->getNext();
     }
 //    // close bracket
-    std::endl;
 //    std::cout << "]" << std::endl;
 } // end display
 
@@ -294,7 +293,6 @@ void DoublyLinkedList<ItemType>::displayBackwards() const {
         temp_list_ptr_ = temp_list_ptr_->getPrevious();
     }
 // close bracket
-    std::endl;
 //    std::cout << "]" << std::endl;
 } // end displayBackwards
 
