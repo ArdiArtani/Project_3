@@ -255,11 +255,11 @@ void DoublyLinkedList<ItemType>::display() const {
     // for loop each node and print its item
     DoubleNode<ItemType>* temp_list_ptr_ = head_ptr_;
     for (int i = 0; i < size_; i++) {
-        std::cout << temp_list_ptr_->getItem() << " ";
+        std::cout << temp_list_ptr_->getItem();
         // print comma after each node aside from the last one
-//        if (i < size_ - 1) {
-//           std::cout << ", ";
-//        }
+        if (i < size_ - 1) {
+           std::cout << " ";
+        }
         // move to next node using getNext()
         temp_list_ptr_ = temp_list_ptr_->getNext();
     }
@@ -284,11 +284,11 @@ void DoublyLinkedList<ItemType>::displayBackwards() const {
     
     // for loop each node in reverse order and print its item
     for (int i = 0; i < size_; i++) {
-        std::cout << temp_list_ptr_->getItem() << " ";
+        std::cout << temp_list_ptr_->getItem();
 //        // print comma after each node aside from the last one
-//        if (i < size_ - 1) {
-//            std::cout << ", ";
-//        }
+        if (i < size_ - 1) {
+            std::cout << " ";
+        }
         // move to previous node using getPrevious()
         temp_list_ptr_ = temp_list_ptr_->getPrevious();
     }
