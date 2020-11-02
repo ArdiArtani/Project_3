@@ -71,7 +71,7 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType &item, const int &positio
             else {
                 // assign head to new_node_ setNext
                 new_node_->setNext(head);
-                head->setPrev(new_node_);
+                head->setPrevious(new_node_);
                 // reset head
                 head = new_node_;
             }
@@ -85,12 +85,12 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType &item, const int &positio
             
             // assign node and if new node is not the last node assign node to left side
             if (temp_node_ptr_->getNext() != nullptr) {
-                temp_node_ptr_->getNext()->setPrev(new_node_);
+                temp_node_ptr_->getNext()->setPrevious(new_node_);
                 new_node_->setNext(temp_node_ptr_->getNext());
             }
             
             temp_node_ptr_->setNext(new_node_);
-            new_node_->setPrev(temp_node_ptr_);
+            new_node_->setPrevious(temp_node_ptr_);
         }
 
         // imcreament size and return true
@@ -133,7 +133,7 @@ bool DoublyLinkedList<ItemType>::remove(const int &position)
                
                // remove node links from right side only if node at right exist
                if (temp_node_ptr_->getNext()->getNext() != nullptr) {
-                   temp_node_ptr_->getNext()->getNext()->setPrev(temp_node_ptr_);
+                   temp_node_ptr_->getNext()->getNext()->setPrevious(temp_node_ptr_);
                    temp_node_ptr_->setNext(temp_node_ptr_->getNext()->getNext());
                }
                else {
@@ -314,14 +314,14 @@ DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLi
         
         // if first list is not null add node
         if (temp_list1_ != nullptr) {
-            interleave_output_->insert(index, temp_list1_->getData());
+            interleave_output_->insert(index, temp_list1_->getItem();
             temp_list1_ = temp_list1_->getNext();
             index++;
         }
         
         // if second list is not null add node
         if (temp_list2_ != nullptr) {
-            interleave_output_->insert(index, temp_list2_->getData());
+            interleave_output_->insert(index, temp_list2_->getItem());
             temp_list2_ = temp_list2_->getNext();
             index++;
         }
