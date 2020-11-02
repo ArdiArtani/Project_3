@@ -315,9 +315,6 @@ void DoublyLinkedList<ItemType>::displayBackwards() const {
 template<class ItemType>
 DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLinkedList<ItemType> &a_list)
 {
-    // create a new list to return
-    DoublyLinkedList<ItemType>* interleavelist_ = new DoublyLinkedList();
-    
     // set index to 1
     int index = 1;
     
@@ -325,35 +322,22 @@ DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLi
     DoubleNode<ItemType>* first_list_ = this->head_ptr_;
     // points to the head_ptr_ of the second list
     DoubleNode<ItemType>* second_list_ = a_list.head_ptr_;
+    // create a new list to return
+    DoublyLinkedList<ItemType>* interleavelist_ = new DoublyLinkedList();
     
-    while (first_list_ != nullptr && second_list_ != nullptr) {
-        // if first list is not done adding add node
-        interleavelist_->insert(first_list_->getItem(), index);
-        first_list_ = first_list_->getNext();
-
-        // if second list is not done adding add node
-        interleavelist_->insert(second_list_->getItem(), index);
-        second_list_ = second_list_->getNext();
+    while (first_list_ != nullptr || second_list_ != nullptr) {
         
-        index++;
-    }
-
-    // if there are still items in list 1
-    if (first_list_ != nullptr && second_list_ == nullptr){
-        // while first_list_ does not equal nullptr
-        while(first_list_ != nullptr){
-            // inseert item into interleavelist_
+        // if first_list_ does not equal nullptr
+        if (first_list_ != nullptr){
+            // insert item into interleavelist_
             interleavelist_->insert(first_list_->getItem(), index);
             // getNext()
             first_list_ = first_list_->getNext();
             index++;
         }
-    }
-    
-    // if there are still items in list 2
-    if (first_list_ == nullptr && second_list_ != nullptr) {
-        // while second_list_ does not equal nullptr
-        while(second_list_ != nullptr){
+        
+        // if second_list_ does not equal nullptr
+        if (second_list_ != nullptr) {
             // inseert item into interleavelist_
             interleavelist_->insert(second_list_->getItem(), index);
             // getNext()
@@ -361,6 +345,42 @@ DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLi
             index++;
         }
     }
+
+    
+    
+//        // if first list is not done adding add node
+//        interleavelist_->insert(first_list_->getItem(), index);
+//        first_list_ = first_list_->getNext();
+//
+//        // if second list is not done adding add node
+//        interleavelist_->insert(second_list_->getItem(), index);
+//        second_list_ = second_list_->getNext();
+//
+//        index++;
+    
+//    // if there are still items in list 1
+//    if (first_list_ != nullptr && second_list_ == nullptr){
+//        // while first_list_ does not equal nullptr
+//        while(first_list_ != nullptr){
+//            // inseert item into interleavelist_
+//            interleavelist_->insert(first_list_->getItem(), index);
+//            // getNext()
+//            first_list_ = first_list_->getNext();
+//            index++;
+//        }
+//    }
+//
+//    // if there are still items in list 2
+//    if (first_list_ == nullptr && second_list_ != nullptr) {
+//        // while second_list_ does not equal nullptr
+//        while(second_list_ != nullptr){
+//            // inseert item into interleavelist_
+//            interleavelist_->insert(second_list_->getItem(), index);
+//            // getNext()
+//            second_list_ = second_list_->getNext();
+//            index++;
+//        }
+//    }
 
     return *interleavelist_;
 } // end interleave
