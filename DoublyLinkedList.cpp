@@ -249,21 +249,22 @@ int DoublyLinkedList<ItemType>::getIndexOf(const ItemType &item) const
 */
 template<class ItemType>
 void DoublyLinkedList<ItemType>::display() const {
-    // open bracket
-    std::cout << "[";
+//    // open bracket
+//    std::cout << "[";
+    
     // for loop each node and print its item
     DoubleNode<ItemType>* temp_list_ptr_ = head_ptr_;
     for (int i = 0; i < size_; i++) {
         std::cout << temp_list_ptr_->getItem();
         // print comma after each node aside from the last one
-        if (i < size_ - 1) {
-           std::cout << ", ";
-        }
+//        if (i < size_ - 1) {
+//           std::cout << ", ";
+//        }
         // move to next node using getNext()
         temp_list_ptr_ = temp_list_ptr_->getNext();
     }
-    // close bracket
-    std::cout << "]" << std::endl;
+//    // close bracket
+//    std::cout << "]" << std::endl;
 } // end display
 
 
@@ -278,20 +279,21 @@ void DoublyLinkedList<ItemType>::displayBackwards() const {
         temp_list_ptr_ = temp_list_ptr_->getNext();
     }
     
-    // open bracket
-    std::cout << "[";
+// open bracket
+//    std::cout << "[";
+    
     // for loop each node in reverse order and print its item
     for (int i = 0; i < size_; i++) {
         std::cout << temp_list_ptr_->getItem();
-        // print comma after each node aside from the last one
-        if (i < size_ - 1) {
-            std::cout << ", ";
-        }
+//        // print comma after each node aside from the last one
+//        if (i < size_ - 1) {
+//            std::cout << ", ";
+//        }
         // move to previous node using getPrevious()
         temp_list_ptr_ = temp_list_ptr_->getPrevious();
     }
-    // close bracket
-    std::cout << "]" << std::endl;
+// close bracket
+//    std::cout << "]" << std::endl;
 } // end displayBackwards
 
 

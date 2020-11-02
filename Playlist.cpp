@@ -21,7 +21,15 @@ Playlist::Playlist() : DoublyLinkedList()
 */
 double Playlist::getTotalTime() const
 {
-    return 0.0;
+    double totalTime = 0.0;
+    //    PlaylistItem* current_playlist_ = head_ptr_;
+//    while (current_playlist_ != NULL)
+//    {
+//        totalTime += current_playlist_->getLength();
+//        current_playlist_ = current_playlist_->getNext();
+//    }
+    
+    return totalTime;
 }
 
 
