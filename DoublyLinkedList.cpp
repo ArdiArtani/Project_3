@@ -132,7 +132,7 @@ bool DoublyLinkedList<ItemType>::remove(const int &position)
     }
     else {
         // create for loop from i to position
-        for (int i = 2; i < position; i++) {
+        for (int i = 1; i < position-1; i++) {
             // assign next node to temp_ptr_
             temp_ptr_ = temp_ptr_->getNext();
         }
