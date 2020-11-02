@@ -108,46 +108,48 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType &item, const int &positio
 template<class ItemType>
 bool DoublyLinkedList<ItemType>::remove(const int &position)
 {
+    
     // first valid position return false
     if (position < 1 || position > size_) {
        return false;
     }
-    else {
-       // create a temp node pointer
-       DoubleNode<ItemType>* temp_ptr_;
-        
-       // check if head node is equal to 1
-       if (position == 1) {
-           temp_ptr_ = head_ptr_;
-           head_ptr_ = head_ptr_->getNext(); // call getNext()
-           if (head_ptr_ != nullptr) {
-               // otherwise call setPrevious()
-               head_ptr_->setPrevious(nullptr);
-           }
-           delete temp_ptr_;
-       }
-       else {
-           // create for loop to loop till given position in the list
-           DoubleNode<ItemType>* temp_node_ptr_ = head_ptr_;
-           for (int i = 2; i < position; i++) {
-               // assign next node to temp_ptr_
-               temp_ptr_ = temp_node_ptr_->getNext();
-               
-               // remove node links from right side only if node at right exist
-               if (temp_node_ptr_->getNext()->getNext() != nullptr) {
-                   temp_node_ptr_->getNext()->getNext()->setPrevious(temp_node_ptr_);
-                   temp_node_ptr_->setNext(temp_node_ptr_->getNext()->getNext());
-               }
-               else {
-                   temp_node_ptr_->setNext(nullptr);
-               }
-               delete temp_ptr_;
-           }
-       }
-       // decrement size
-        size_--;
-       return true;
+    
+    // create a temp node pointer
+    DoubleNode<ItemType>* temp_ptr_;
+    
+    // check if head node is equal to 1
+    if (position == 1) {
+        temp_ptr_ = head_ptr_;
+        head_ptr_ = head_ptr_->getNext(); // call getNext()
+        if (head_ptr_ != nullptr) {
+            // otherwise call setPrevious()
+            head_ptr_->setPrevious(nullptr);
+        }
+        delete temp_ptr_;
     }
+    else {
+        // create for loop to loop till given position in the list
+        DoubleNode<ItemType>* temp_node_ptr_ = head_ptr_;
+        for (int i = 2; i < position; i++) {
+            // assign next node to temp_ptr_
+            temp_ptr_ = temp_node_ptr_->getNext();
+
+            // remove node links from right side only if node at right exist
+            if (temp_node_ptr_->getNext()->getNext() != nullptr) {
+                temp_node_ptr_->getNext()->getNext()->setPrevious(temp_node_ptr_);
+                temp_node_ptr_->setNext(temp_node_ptr_->getNext()->getNext());
+            }
+            else {
+                temp_node_ptr_->setNext(nullptr);
+            }
+            delete temp_ptr_;
+        }
+    }
+    
+    // decrement size
+    size_--;
+    return true;
+    
 } // end remove
 
 
