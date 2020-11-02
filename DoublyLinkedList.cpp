@@ -220,7 +220,7 @@ void DoublyLinkedList<ItemType>::displayBackwards() const {
             std::cout << ", ";
         }
         // move to previous node using getPrev()
-        temp_list_ptr_ = temp_list_ptr_->getPrev();
+        temp_list_ptr_ = temp_list_ptr_->getPrevious();
     }
     // close bracket
     std::cout << "]" << std::endl;
