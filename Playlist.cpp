@@ -46,7 +46,14 @@ double Playlist::getTotalTime() const
 */
 void Playlist::operator+=(Playlist rhs)
 {
+    DoubleNode <PlaylistItem*>* temp_ptr_ = head_ptr_;
+    int index = 0;
     
+    while (temp_ptr_ != nullptr) {
+        
+        rhs.insert(temp_ptr_->getItem(), size_ + index);
+        temp_ptr_ = temp_ptr_->getNext();
+    }
 }
 
 
