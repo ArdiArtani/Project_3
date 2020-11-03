@@ -41,8 +41,8 @@ double Playlist::getTotalTime() const
 /*
     Parameter: Another Playlist (rhs)
     Goal: Implement Union.
-        rhs to be combined with the contents of this (the calling) list.
-        Duplicates are allowed.
+    rhs to be combined with the contents of this (the calling) list.
+    Duplicates are allowed.
 */
 void Playlist::operator+=(Playlist rhs)
 {
@@ -66,7 +66,23 @@ void Playlist::operator-=(Playlist rhs)
 */
 void Playlist::skip()
 {
-    
+    /* Initialize first and last pointers */
+    DoubleNode <PlaylistItem*>* first_ptr_ = head_ptr_;
+    DoubleNode <PlaylistItem*>* last_ptr_ = head_ptr_;
+
+    // after this loop last contains address of last node in Linked List
+    while (last_ptr_->getNext() != nullptr) {
+        last_ptr_ = last_ptr_->getNext();
+    }
+  
+    // change the head pointer to point to second node now
+    head_ptr_ = first_ptr_->getNext();
+  
+    // set the next of first as nullptr
+    first_ptr_->setNext(nullptr);
+  
+    // set the next of last as first
+    last_ptr_->setNext(first_ptr_);
 }
 
 
@@ -75,7 +91,36 @@ void Playlist::skip()
 */
 void Playlist::rewind()
 {
+    /* Initialize first and last pointers */
+    DoubleNode <PlaylistItem*>* first_ptr_ = head_ptr_;
+    DoubleNode <PlaylistItem*>* last_ptr_ = head_ptr_;
     
+//    first_ptr_
+//    A
+//    B
+//    C 
+//
+//    REWIND()
+//
+//    last_ptr_
+//    C
+//    A
+//    B
+    
+//    last_ptr_ == C
+    
+    // after this loop last contains address of last node in Linked List
+    while (first_ptr_->getNext() != nullptr) {
+        first_ptr_ = first_ptr_->getNext();
+    }
+    
+    // change the second node to point to head pointer
+    //    first_ptr_ = head_ptr_->getNext();
+    
+    last_ptr_->setNext(first_ptr_);
+    
+    // set the next of last as first
+    last_ptr_->setPrevious(nullptr);
 }
 
 
